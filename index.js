@@ -31,13 +31,18 @@ io.sockets.on('connection', function (socket) {
         console.log("join");
     });
 
+    socket.on('join room', function(){
+      ////////////////////////////////////// to do
+    });
+
 
     // when the client emits 'new message', this listens and executes
     socket.on('new message', function (data) {
         // we tell the client to execute 'new message'
-        socket.to(roomId).emit('new message', {
+        console.log(data['crno']+data['msg']);
+        socket.to(data['crno']).emit('new message', {
             username: socket.username,
-            message: data
+            message: data['msg']
         });
     });
 
