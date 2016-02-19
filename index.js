@@ -23,16 +23,17 @@ io.sockets.on('connection', function (socket) {
     var roomId;
 
     socket.on('create room', function(crno){
-        console.log(crno+"crno");
+        console.log("create: "+crno);
         roomId = crno;
-        console.log("roomNum: "+ roomId);
         socket.join(roomId.toString());
         console.log("roomList: "+ io.sockets.adapter.rooms);
         console.log("join");
     });
 
-    socket.on('join room', function(){
-      ////////////////////////////////////// to do
+    socket.on('join room', function(crno){
+      console.log("join: "+crno);
+      roomId = crno;
+      socket.join(roomId.toString());
     });
 
 
