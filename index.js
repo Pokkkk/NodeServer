@@ -13,26 +13,27 @@ server.listen(port, function () {
 
 // Chatroom
 
-var numUsers = 0;
+//var numUsers = 0;
 
 
 
 io.sockets.on('connection', function (socket) {
-    var addedUser = false;
+    //var addedUser = false;
     //console.log(roomNum);
     var roomId;
 
     socket.on('create room', function(crno){
         console.log("create: "+crno);
-        roomId = crno;
+        roomId = "cr"+crno;
         socket.join(roomId.toString());
         console.log("roomList: "+ io.sockets.adapter.rooms);
-        console.log("join");
+        console.log("created");
     });
 
     socket.on('join room', function(crno){
+
         console.log("join: "+crno);
-        roomId = crno;
+        roomId = "cr"+crno;
         socket.join(roomId.toString());
         console.log("id: "+ socket.id);
     });
@@ -41,10 +42,10 @@ io.sockets.on('connection', function (socket) {
     // when the client emits 'new message', this listens and executes
     socket.on('new message', function (data) {
         // we tell the client to execute 'new message'
-        console.log(data['crno']+data['msg']);
-        console.log("rooms: "+ socket.rooms);
-        socket.to(data['crno']).emit('new message', {
-            username: socket.username,
+
+        console.log(data['crno']+data['senderName']+data['msg']);
+        socket.in("cr"+data['crno']).emit('new message', {
+            username: data['senderName'],
             message: data['msg']
         });
     });
