@@ -44,7 +44,7 @@ io.sockets.on('connection', function (socket) {
         // we tell the client to execute 'new message'
 
         console.log(data['crno']+data['senderName']+data['msg']);
-        socket.in("cr"+data['crno']).emit('new message', {
+        io.sockets.in("cr"+data['crno']).emit('new message', {
             username: data['senderName'],
             message: data['msg']
         });
