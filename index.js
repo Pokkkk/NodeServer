@@ -31,9 +31,10 @@ io.sockets.on('connection', function (socket) {
     });
 
     socket.on('join room', function(crno){
-      console.log("join: "+crno);
-      roomId = crno;
-      socket.join(roomId.toString());
+        console.log("join: "+crno);
+        roomId = crno;
+        socket.join(roomId.toString());
+        console.log("id: "+ socket.id);
     });
 
 
@@ -41,6 +42,7 @@ io.sockets.on('connection', function (socket) {
     socket.on('new message', function (data) {
         // we tell the client to execute 'new message'
         console.log(data['crno']+data['msg']);
+        console.log("rooms: "+ socket.rooms);
         socket.to(data['crno']).emit('new message', {
             username: socket.username,
             message: data['msg']
