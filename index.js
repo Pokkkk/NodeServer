@@ -45,6 +45,7 @@ io.sockets.on('connection', function (socket) {
 
         console.log(data['crno']+data['senderName']+data['msg']);
         socket.in("cr"+data['crno']).emit('new message', {
+            crno: data['crno'],
             username: data['senderName'],
             message: data['msg']
         });
