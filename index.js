@@ -1,5 +1,7 @@
 var express = require('express');
 var app = express();
+var gcm = require('node-gcm');
+var fs = require('fs');
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var port = process.env.PORT || 3000;
@@ -52,6 +54,10 @@ io.sockets.on('connection', function (socket) {
         });
     });
 
+
+
+
+
     // when the client emits 'add user', this listens and executes
     //socket.on('add user', function (username) {
     //    if (addedUser) return;
@@ -96,4 +102,29 @@ io.sockets.on('connection', function (socket) {
     //        });
     //    }
     //});
+});
+
+var message = new gcm.Message();
+
+var message = new gcm.Message({
+    collapseKey: 'demo',
+    delayWhileIdle: true,
+    timeToLive: 3,
+    data: {
+        title: 'Bit-Talk',
+        message: '빗톡왔어요',
+        custom_key1: 'custom data1',
+        custom_key2: 'custom data2'
+    }
+});
+
+var server_api_key = 'AIzaSyD3leDcMuediChhoKuUwh-tog17lhFFVgI';
+var sender = new gcm.Sender(server_api_key);
+var registrationIds = [];
+
+var token = 'cJVVkpPRznw:APA91bEEx-AyhIH9iHiXnRpidh10I9ADCGE6LJAk1Xx0egc8E0_DeK6q3B-zFY-RrPMUIMCdt8MLi-7zg1Ete6umPwU7Oflnx6ROLdHa_DtyhEV6I7S7bqkSMdXsCUm3cOHnmH6fwn96';
+registrationIds.push(token);
+
+sender.send(message, registrationIds, 4, function (err, result) {
+    console.log(result);
 });
