@@ -7,7 +7,7 @@ var io = require('socket.io')(server);
 var port = process.env.PORT || 3000;
 ////////
 var message = new gcm.Message();
-var server_api_key = 'AIzaSyD3leDcMuediChhoKuUwh-tog17lhFFVgI';
+var server_api_key = 'AIzaSyBP1yHI2Ps6jQ3L7WMAessByWCJ0bJLL2E';
 var sender = new gcm.Sender(server_api_key);
 var registrationIds = [];
 ////////
