@@ -65,10 +65,13 @@ io.sockets.on('connection', function (socket) {
             }
         });
         //방에있는 token 받아오기
-        for(token:data['tokens']){
-          console.log(token);
-          //registrationIds.push(token);
+        var tokensArr = JSON.parse(data['tokens']);
+        for(var i=0; i<tokensArr.length;i++){
+            console.log(tokensArr[i]["mtoken"]);
+            var token = tokensArr[i]["mtoken"];
+            registrationIds.push(token);
         }
+
         sender.send(message, registrationIds, 4, function (err, result) {
             console.log(result);
         });
