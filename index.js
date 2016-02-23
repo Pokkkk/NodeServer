@@ -51,18 +51,26 @@ io.sockets.on('connection', function (socket) {
     socket.on('new message', function (data) {
         // we tell the client to execute 'new message'
 
-        console.log(data['crno']+data['senderNo']+data['senderName']+data['msg']);
+        console.log(data['crno']+data['senderNo']+data['senderName']+data['msg']
+                    +data['tokens']);
         var message = new gcm.Message({
             collapseKey: 'demo',
             delayWhileIdle: true,
             timeToLive: 3,
             data: {
-                title: 'Bit-Talk',
-                message: '빗톡왔어요',
+                title: data['senderName'],
+                message: data['msg'],
                 custom_key1: 'custom data1',
                 custom_key2: 'custom data2'
             }
         });
+        //방에있는 token 받아오기
+        var token = 'cJVVkpPRznw:APA91bEEx-AyhIH9iHiXnRpidh10I9ADCGE6LJAk1Xx0egc8E0_DeK6q3B-zFY-RrPMUIMCdt8MLi-7zg1Ete6umPwU7Oflnx6ROLdHa_DtyhEV6I7S7bqkSMdXsCUm3cOHnmH6fwn96';
+        registrationIds.push(token);
+        sender.send(message, registrationIds, 4, function (err, result) {
+            console.log(result);
+        });
+
 
         io.sockets.in("cr"+data['crno']).emit('new message', {
             crno: data['crno'],
@@ -143,6 +151,6 @@ io.sockets.on('connection', function (socket) {
 // var token = 'cJVVkpPRznw:APA91bEEx-AyhIH9iHiXnRpidh10I9ADCGE6LJAk1Xx0egc8E0_DeK6q3B-zFY-RrPMUIMCdt8MLi-7zg1Ete6umPwU7Oflnx6ROLdHa_DtyhEV6I7S7bqkSMdXsCUm3cOHnmH6fwn96';
 // registrationIds.push(token);
 
-sender.send(message, registrationIds, 4, function (err, result) {
-    console.log(result);
-});
+// sender.send(message, registrationIds, 4, function (err, result) {
+//     console.log(result);
+// });
