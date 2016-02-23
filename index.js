@@ -65,8 +65,10 @@ io.sockets.on('connection', function (socket) {
             }
         });
         //방에있는 token 받아오기
-        var token = 'cJVVkpPRznw:APA91bEEx-AyhIH9iHiXnRpidh10I9ADCGE6LJAk1Xx0egc8E0_DeK6q3B-zFY-RrPMUIMCdt8MLi-7zg1Ete6umPwU7Oflnx6ROLdHa_DtyhEV6I7S7bqkSMdXsCUm3cOHnmH6fwn96';
-        registrationIds.push(token);
+        for(token:data['tokens']){
+          console.log(token);
+          //registrationIds.push(token);
+        }
         sender.send(message, registrationIds, 4, function (err, result) {
             console.log(result);
         });
