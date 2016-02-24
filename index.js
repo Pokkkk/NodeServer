@@ -61,8 +61,8 @@ io.sockets.on('connection', function (socket) {
             data: {
                 title: data['senderName'],
                 message: data['msg'],
-                custom_key1: 'custom data1',
-                custom_key2: 'custom data2'
+                crno: data['crno'],
+                senderNo: data['senderNo']
             }
         });
         //방에있는 token 받아오기
