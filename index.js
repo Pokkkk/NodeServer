@@ -76,7 +76,7 @@ io.sockets.on('connection', function (socket) {
         sender.send(message, registrationIds, 4, function (err, result) {
             console.log(result);
         });
-
+        registrationIds.splice(0,registrationIds.length);
 
         io.sockets.in("cr"+data['crno']).emit('new message', {
             crno: data['crno'],
