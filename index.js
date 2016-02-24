@@ -49,14 +49,15 @@ io.sockets.on('connection', function (socket) {
 
     // when the client emits 'new message', this listens and executes
     socket.on('new message', function (data) {
+        var randomNum = Math.random()*(10000);
         // we tell the client to execute 'new message'
 
         console.log(data['crno']+data['senderNo']+data['senderName']+data['msg']
                     +data['tokens']);
         var message = new gcm.Message({
-            collapseKey: 'demo',
-            delayWhileIdle: true,
-            timeToLive: 3,
+            //collapseKey: 'demo',
+            delayWhileIdle: false,
+            //timeToLive: 3,
             data: {
                 title: data['senderName'],
                 message: data['msg'],
@@ -67,8 +68,8 @@ io.sockets.on('connection', function (socket) {
         //방에있는 token 받아오기
         var tokensArr = JSON.parse(data['tokens']);
         for(var i=0; i<tokensArr.length;i++){
-            console.log(tokensArr[i]["mtoken"]);
             var token = tokensArr[i]["mtoken"];
+            console.log(tokensArr[i]["mtoken"]);
             registrationIds.push(token);
         }
 
