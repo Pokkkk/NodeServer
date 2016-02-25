@@ -36,7 +36,7 @@ io.sockets.on('connection', function (socket) {
     socket.on('new message', function (data) {
         // we tell the client to execute 'new message'
 
-        console.log("crno:"+data['crno']+" senderNo:"+data['senderNo']+data['senderName']+data['msg']);
+        console.log("crno:"+data['crno']+" senderNo:"+data['senderNo']+ +" "+ data['senderName']+ " "+ data['msg']);
         var message = new gcm.Message({
             //collapseKey: 'demo',
             delayWhileIdle: false,
@@ -67,7 +67,7 @@ io.sockets.on('connection', function (socket) {
             message: data['msg']
         });
     });
-    socket.on('leave', function(crno){
+    socket.on('leave', function(crno) {
       console.log("leave: "+crno);
       roomId = "cr"+crno;
       socket.leave(roomId.toString());
