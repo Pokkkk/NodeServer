@@ -67,6 +67,11 @@ io.sockets.on('connection', function (socket) {
             message: data['msg']
         });
     });
+    socket.on('disconnect', fucntion(crno){
+      console.log("leave: "+crno);
+      roomId = "cr"+crno;
+      socket.leave(roomId.toString());
+    });
 
 
 
