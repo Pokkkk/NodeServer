@@ -6,7 +6,7 @@ var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var port = process.env.PORT || 3000;
 var message = new gcm.Message();
-var server_api_key = 'AIzaSyBP1yHI2Ps6jQ3L7WMAessByWCJ0bJLL2E';
+var server_api_key = 'AIzaSyDGggtsCV0XncGZFb0iR8Mrn0Gsnx8RNps';
 var sender = new gcm.Sender(server_api_key);
 var registrationIds = [];
 
